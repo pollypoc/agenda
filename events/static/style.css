@@ -1,8 +1,7 @@
 .div-background{
-    backgroun-image: url('https://www.askideas.com/media/45/Panorama-View-Of-The-Hong-Kong-Disneyland.jpg');
-    background-position: bottom;
+    background-image: url('https://i.pinimg.com/originals/e8/60/fb/e860fb9548480e56996c8a8eed6a442d.jpg');
+    background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
-
 }
