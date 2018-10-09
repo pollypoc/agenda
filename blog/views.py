@@ -1,12 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
-from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm
-
-from django.utils.timezone import localdate
-from datetime import datetime
 from events.models import Event
+from datetime import datetime
+from django.utils.timezone import localdate
+
 
 
 def post_list(request):
@@ -29,21 +28,19 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-        day = datetime(localdate().year, localdate().month, localdate().day)
-        context = {
-            'events': Event.objects.filter(
-                date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
-            'form': form
-        }
+    day = datetime(localdate().year, localdate().month, localdate().day)
+    context = {
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+        'form': form
+    }
     return render(request, 'blog/post_edit.html', context)
 
 def day():
-    """Visualização dos eventos de um determinado dia, recebe a data em
-    formato ano/mês/dia como parâmtro."""
     day = datetime(localdate().year, localdate().month, localdate().day)
     context = {
-            'events': Event.objects.filter(
-                date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
     }
 
 def post_edit(request, pk):
@@ -58,10 +55,10 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-        day = datetime(localdate().year, localdate().month, localdate().day)
-        context = {
-            'events': Event.objects.filter(
-                date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
-            'form': form
-        }
+    day = datetime(localdate().year, localdate().month, localdate().day)
+    context = {
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+        'form': form
+    }
     return render(request, 'blog/post_edit.html', context)

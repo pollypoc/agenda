@@ -6,7 +6,7 @@
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
- <div class="card-body">
+    <div class="card-body">
             {% if events|length > 0 %}
             {% for event in events %}
                 <div role="alert" class="d-flex alert {% if event.priority == '1' %} alert-success{% elif event.priority == '2' %} alert-warning{% elif event.priority == '3' %} alert-danger{% else %} alert-secondary{% endif %}">
