@@ -5,6 +5,8 @@ from .forms import PostForm
 from events.models import Event
 from datetime import datetime
 from django.utils.timezone import localdate
+from .forms import CadForm
+from .models import Cadastro
 
 
 
@@ -62,3 +64,26 @@ def post_edit(request, pk):
         'form': form
     }
     return render(request, 'blog/post_edit.html', context)
+
+def post_cad(request):
+    if request.method == "Cadastro":
+        form = CadForm(request.Cadastro)
+        if form.is_valid():
+            cad = form.save(commit=False)
+            cad.author = request.user
+            cad.published_date = timezone.now()
+            cad.save()
+            return redirect('cadastro', pk=post.pk)
+    else:
+        form = CadForm()
+    day = datetime(localdate().year, localdate().month, localdate().day)
+    context = {
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+        'form': form
+    }
+    return render(request, 'blog/cadastro.html', context)
+
+def cad_list(request):
+    cad = Cadastro.objects.all()
+    return render(request, 'blog/cad_list.html', {'cad':cad})

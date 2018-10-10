@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for cad in cad %}
+
+        <h1>{{cad.nome}}</h1>
+        <p>IDADE: {{cad.idade}}</p>
+        <p>NASCIMENTO: {{cad.nascimento}}</p>
+        <p>EMAIL: {{cad.email}}</p>
+        <p>TELEFONE: {{cad.telefone}}</p>
+        <p>SEXO: {{cad.sexo}}</p>
+        <p>ESTADO CIVIL: {{cad.estado_civil}}</p>
+
+    {% endfor %}
+{% endblock %}
